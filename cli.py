@@ -3,6 +3,7 @@ import click
 from day1.cli import day1
 from day2.cli import day2
 from day3.cli import day3
+from day4.cli import day4
 
 @click.group()
 def cli():
@@ -11,6 +12,7 @@ def cli():
 cli.add_command(day1)
 cli.add_command(day2)
 cli.add_command(day3)
+cli.add_command(day4)
 
 # When invoked as a script, do this
 if __name__ == '__main__':
