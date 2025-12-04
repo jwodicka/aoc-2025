@@ -39,6 +39,30 @@ def part1(input):
 def part2(input):
     """Solves part 2"""
 
+    total = 0
+    for line in input.read().splitlines():
+        # For each line:
+        # Find the highest digit in any but the last 11 positions
+        # Then find the highest 11 digits right of that digit
+        total += int(find_biggest(line, 12))
+    echo(total)
+
+def find_biggest(line, n):
+    highest = "0"
+    highest_pos = -1
+    working_line = line[:-(n-1)] if n > 1 else line
+    # echo(str(n) + "  " + working_line)
+    for pos, char in enumerate(working_line):
+        if char > highest:
+            highest = char
+            highest_pos = pos
+    if n == 1:
+        return highest
+    rest = find_biggest(line[highest_pos+1:], n-1)
+    best = highest + rest
+    return best
+
+
 # When invoked as a script, do this
 if __name__ == '__main__':
     day3()
