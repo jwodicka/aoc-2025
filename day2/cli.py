@@ -10,17 +10,16 @@ sequence of digits repeated twice. So, 55 (5 twice), 6464 (64 twice), and
 """
 
 import click
-import math
 
 echo = click.echo
 
 
 @click.group()
-def group():
-    """Sure is a group"""
+def day2():
+    """Solves Day 2's problems"""
 
 
-@group.command()
+@day2.command()
 @click.argument("input", type=click.File("r"))
 def part1(input):
     """Solves part 1"""
@@ -37,7 +36,7 @@ def part1(input):
     echo(sum(bad_ids))
 
 
-@group.command()
+@day2.command()
 @click.argument("input", type=click.File("r"))
 def part2(input):
     """Solves part 2"""
@@ -98,4 +97,4 @@ def is_illegal_id_v2(num):
 
 # When invoked as a script, do this
 if __name__ == '__main__':
-    group()
+    day2()

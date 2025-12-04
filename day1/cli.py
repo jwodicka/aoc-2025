@@ -23,10 +23,10 @@ import math
 echo = click.echo
 
 @click.group()
-def group():
-    """Sure is a group"""
+def day1():
+    """Solves Day 1's problems"""
 
-@group.command()
+@day1.command()
 @click.argument("input", type=click.File("r"))
 def part1(input):
     """Solves part 1"""
@@ -44,7 +44,7 @@ def part1(input):
     echo(zeroes)
     
 
-@group.command()
+@day1.command()
 @click.argument("input", type=click.File("r"))
 def part2(input):
     """Solves part 2"""
@@ -109,4 +109,4 @@ def parse_dial(input):
 
 # When invoked as a script, do this
 if __name__ == '__main__':
-    group()
+    day1()
