@@ -85,8 +85,7 @@ def part1(input, n):
     for _ in range(3):
         biggest.append(group_queue.get()[1])
 
-    sizes = list(map(len, biggest))
-    # echo(list(sizes))
+    sizes = map(len, biggest)
     echo(reduce(mul, sizes))
 
 
@@ -94,6 +93,45 @@ def part1(input, n):
 @click.argument("input", type=click.File("r"))
 def part2(input):
     """Solves part 2"""
+
+    lines = input.read().splitlines()
+    points = set(map(line_to_point, lines))
+
+    pairs = set(itertools.combinations(points, 2))
+    
+    queue = PriorityQueue()
+    for pair in pairs:
+        queue.put((distance(*pair), pair))
+
+    groups_by_point = {}
+    for point in points:
+        groups_by_point[point] = frozenset([point])
+    groups = set(groups_by_point.values())
+
+    def merge(a, b):
+        a_group = groups_by_point[a]
+        b_group = groups_by_point[b]
+        if a_group == b_group:
+            return False
+        merged = a_group.union(b_group)
+        for point in merged:
+            groups_by_point[point] = merged
+        groups.remove(a_group)
+        groups.remove(b_group)
+        groups.add(merged)
+        return True
+
+    pair = (None, None)
+    while len(groups) > 1:
+        dist, pair = queue.get()
+        echo(dist)
+        if merge(*pair):
+            echo(pair)
+
+        echo(sum(map(len, groups)))
+    a, b = pair
+    echo(a.x * b.x)
+        
 
 
 # When invoked as a script, do this
