@@ -6,6 +6,7 @@ from day3.cli import day3
 from day4.cli import day4
 from day5.cli import day5
 from day6.cli import day6
+from day7.cli import day7
 
 @click.group()
 def cli():
@@ -17,6 +18,7 @@ cli.add_command(day3)
 cli.add_command(day4)
 cli.add_command(day5)
 cli.add_command(day6)
+cli.add_command(day7)
 
 # When invoked as a script, do this
 if __name__ == '__main__':
